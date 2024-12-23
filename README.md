@@ -1,3 +1,13 @@
+# MILE Open WebUI
+## Docker publish
+
+az login
+az acr login --name mileaicr
+docker build -t mile-open-webui .
+docker tag mile-open-webui mileaicr.azurecr.io/mile-open-webui/open-webui
+docker push mileaicr.azurecr.io/mile-open-webui/open-webui
+
+
 # Open WebUI 👋
 
 ![GitHub stars](https://img.shields.io/github/stars/open-webui/open-webui?style=social)
