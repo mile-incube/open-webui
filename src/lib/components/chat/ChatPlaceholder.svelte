@@ -67,7 +67,7 @@
 
 		{#if $temporaryChatEnabled}
 			<Tooltip
-				content="This chat won't appear in history and your messages will not be saved."
+				content="{$i18n.t('This chat won\'t appear in history and your messages will not be saved.')}"
 				className="w-fit"
 				placement="top-start"
 			>
