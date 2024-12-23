@@ -968,7 +968,7 @@
 									{/if}
 
 									<div class="self-end mb-1.5 flex space-x-1 mr-1">
-										{#if !history?.currentId || history.messages[history.currentId]?.done == true}
+										{#if false && (!history?.currentId || history.messages[history.currentId]?.done == true)}
 											<Tooltip content={$i18n.t('Record voice')}>
 												<button
 													id="voice-input-button"
@@ -1017,8 +1017,8 @@
 											</Tooltip>
 										{/if}
 
-										{#if !history.currentId || history.messages[history.currentId]?.done == true}
-											{#if prompt === ''}
+										{#if true || (!history.currentId || history.messages[history.currentId]?.done == true)}
+											{#if false && (prompt === '')}
 												<div class=" flex items-center">
 													<Tooltip content={$i18n.t('Call')}>
 														<button
