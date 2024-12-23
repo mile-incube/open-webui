@@ -989,7 +989,7 @@
 	"Web Search Engine": "Suchmaschine",
 	"Web Search Query Generation": "",
 	"Webhook URL": "Webhook URL",
-	"WebUI Settings": "WebUI-Einstellungen",
+	"WebUI Settings": "Allgemeine Einstellungen",
 	"WebUI will make requests to \"{{url}}/api/chat\"": "WebUI wird Anfragen an \"{{url}}/api/chat\" senden",
 	"WebUI will make requests to \"{{url}}/chat/completions\"": "WebUI wird Anfragen an \"{{url}}/chat/completions\" senden",
 	"What are you trying to achieve?": "Was versuchen Sie zu erreichen?",
