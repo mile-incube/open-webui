@@ -184,7 +184,7 @@
 				<div class=" self-center truncate">{$i18n.t('Sign Out')}</div>
 			</button>
 
-			{#if $activeUserCount}
+			<!--{#if $activeUserCount}
 				<hr class=" border-gray-50 dark:border-gray-850 my-1 p-0" />
 
 				<Tooltip
@@ -212,7 +212,7 @@
 						</div>
 					</div>
 				</Tooltip>
-			{/if}
+			{/if}-->
 
 			<!-- <DropdownMenu.Item class="flex items-center px-3 py-2 text-sm ">
 				<div class="flex items-center">Profile</div>
