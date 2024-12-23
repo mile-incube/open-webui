@@ -232,7 +232,7 @@
 			<UpdatePassword />
 		</div>
 
-		<hr class=" dark:border-gray-850 my-4" />
+		<!--<hr class=" dark:border-gray-850 my-4" />
 
 		<div class="flex justify-between items-center text-sm">
 			<div class="  font-medium">{$i18n.t('API keys')}</div>
@@ -393,7 +393,7 @@
 				{/if}
 			</div>
 		{/if}
-	</div>
+	</div>-->
 
 	<div class="flex justify-end pt-3 text-sm font-medium">
 		<button
