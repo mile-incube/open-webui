@@ -1,6 +1,6 @@
 {
-  "name": "Open WebUI",
-  "short_name": "WebUI",
+  "name": "MILE AI Chat",
+  "short_name": "MILE Chat",
   "icons": [
     {
       "src": "/favicon/web-app-manifest-192x192.png",
