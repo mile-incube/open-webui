@@ -4,8 +4,8 @@
 az login
 az acr login --name mileaicr
 docker build -t mile-open-webui .
-docker tag mile-open-webui mileaicr.azurecr.io/mile-open-webui/open-webui
-docker push mileaicr.azurecr.io/mile-open-webui/open-webui
+docker tag mile-open-webui mileaicr.azurecr.io/mile-incube/mile-ai/open-webui
+docker push mileaicr.azurecr.io/mile-incube/mile-ai/open-webui
 
 
 # Open WebUI 👋
