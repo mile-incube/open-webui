@@ -358,7 +358,7 @@
 
 								<!-- {JSON.stringify(item.info)} -->
 
-								{#if item.model.owned_by === 'openai'}
+								<!--{#if item.model.owned_by === 'openai'}
 									<Tooltip content={`${'External'}`}>
 										<div class="translate-y-[1px]">
 											<svg
@@ -380,7 +380,7 @@
 											</svg>
 										</div>
 									</Tooltip>
-								{/if}
+								{/if}-->
 
 								{#if item.model?.info?.meta?.description}
 									<Tooltip
