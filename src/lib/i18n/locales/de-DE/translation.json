@@ -1021,5 +1021,9 @@
 	"Your account status is currently pending activation.": "Ihr Kontostatus ist derzeit ausstehend und wartet auf Aktivierung.",
 	"Your entire contribution will go directly to the plugin developer; Open WebUI does not take any percentage. However, the chosen funding platform might have its own fees.": "Ihr gesamter Beitrag geht direkt an den Plugin-Entwickler; Open WebUI behält keinen Prozentsatz ein. Die gewählte Finanzierungsplattform kann jedoch eigene Gebühren haben.",
 	"Youtube": "YouTube",
-	"Youtube Loader Settings": "YouTube-Ladeeinstellungen"
+	"Youtube Loader Settings": "YouTube-Ladeeinstellungen",
+	"Your session has expired or the token is invalid. Please sign in again.": "Ihre Sitzung ist abgelaufen oder das Token ist ungültig. Bitte melden Sie sich erneut an.",
+    "The email or password provided is incorrect. Please check for typos and try logging in again.": "Die angegebene E-Mail-Adresse oder das Passwort ist falsch. Bitte versuchen Sie es erneut.",
+    "The email format you entered is invalid. Please double-check and make sure you're using a valid email address (e.g., yourname@example.com).": "Das von Ihnen eingegebene E-Mail-Format ist ungültig. Bitte überprüfen Sie es noch einmal und stellen Sie sicher, dass Sie eine gültige E-Mail-Adresse verwenden (z. B. ihrname@beispiel.com).",
+	"The password provided is incorrect. Please check for typos and try again.": "Das angegebene Passwort ist falsch. Bitte versuchen Sie es erneut."
 }
