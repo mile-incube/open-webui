@@ -1,16 +1,25 @@
 <script lang="ts">
 	import { getAdminDetails } from '$lib/apis/auths';
-	import { onMount, tick, getContext } from 'svelte';
+	import { onMount, onDestroy, tick, getContext } from 'svelte';
 
 	const i18n = getContext('i18n');
 
-	let adminDetails = null;
+	let timeoutHandle: NodeJS.Timeout | null = null;
+
+	async function refreshPage() {
+		window.location.reload();
+	}
 
 	onMount(async () => {
-		adminDetails = await getAdminDetails(localStorage.token).catch((err) => {
-			console.error(err);
-			return null;
-		});
+		timeoutHandle = setInterval(async () => {
+			await refreshPage();
+		}, 30000);
+	});
+
+	onDestroy(() => {
+		if (timeoutHandle) {
+			clearTimeout(timeoutHandle);
+		}
 	});
 </script>
 
@@ -21,22 +30,12 @@
 		<div class="m-auto pb-10 flex flex-col justify-center">
 			<div class="max-w-md">
 				<div class="text-center dark:text-white text-2xl font-medium z-50">
-					{$i18n.t('Account Activation Pending')}<br />
-					{$i18n.t('Contact Admin for WebUI Access')}
+					{$i18n.t('Account setup pending')}
 				</div>
 
 				<div class=" mt-4 text-center text-sm dark:text-gray-200 w-full">
-					{$i18n.t('Your account status is currently pending activation.')}<br />
-					{$i18n.t(
-						'To access the WebUI, please reach out to the administrator. Admins can manage user statuses from the Admin Panel.'
-					)}
+					{$i18n.t('We are currently preparing your account, this may take a few seconds.')}
 				</div>
-
-				{#if adminDetails}
-					<div class="mt-4 text-sm font-medium text-center">
-						<div>{$i18n.t('Admin')}: {adminDetails.name} ({adminDetails.email})</div>
-					</div>
-				{/if}
 
 				<div class=" mt-6 mx-auto relative group w-fit">
 					<button

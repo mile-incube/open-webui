@@ -15,6 +15,7 @@ from starlette.responses import RedirectResponse
 from open_webui.apps.webui.models.auths import Auths
 from open_webui.apps.webui.models.users import Users
 from open_webui.config import (
+    ENV,
     DEFAULT_USER_ROLE,
     ENABLE_OAUTH_SIGNUP,
     OAUTH_MERGE_ACCOUNTS_BY_EMAIL,
@@ -24,6 +25,8 @@ from open_webui.config import (
     OAUTH_EMAIL_CLAIM,
     OAUTH_PICTURE_CLAIM,
     OAUTH_USERNAME_CLAIM,
+    OAUTH_GIVENNAME_CLAIM,
+    OAUTH_FAMILYNAME_CLAIM,
     OAUTH_ALLOWED_ROLES,
     OAUTH_ADMIN_ROLES,
     WEBHOOK_URL,
@@ -47,6 +50,8 @@ auth_manager_config.OAUTH_ROLES_CLAIM = OAUTH_ROLES_CLAIM
 auth_manager_config.OAUTH_EMAIL_CLAIM = OAUTH_EMAIL_CLAIM
 auth_manager_config.OAUTH_PICTURE_CLAIM = OAUTH_PICTURE_CLAIM
 auth_manager_config.OAUTH_USERNAME_CLAIM = OAUTH_USERNAME_CLAIM
+auth_manager_config.OAUTH_GIVENNAME_CLAIM = OAUTH_GIVENNAME_CLAIM
+auth_manager_config.OAUTH_FAMILYNAME_CLAIM = OAUTH_FAMILYNAME_CLAIM
 auth_manager_config.OAUTH_ALLOWED_ROLES = OAUTH_ALLOWED_ROLES
 auth_manager_config.OAUTH_ADMIN_ROLES = OAUTH_ADMIN_ROLES
 auth_manager_config.WEBHOOK_URL = WEBHOOK_URL
@@ -64,6 +69,7 @@ class OAuthManager:
                 server_metadata_url=provider_config["server_metadata_url"],
                 client_kwargs={
                     "scope": provider_config["scope"],
+                    'verify': False #ENV != 'dev'
                 },
                 redirect_uri=provider_config["redirect_uri"],
             )
@@ -118,6 +124,8 @@ class OAuthManager:
         return role
 
     async def handle_login(self, provider, request):
+        log.info(f"Current Provider: {provider}")
+
         if provider not in OAUTH_PROVIDERS:
             raise HTTPException(404)
         # If the provider has a custom redirect URL, use that, otherwise automatically generate one
@@ -127,6 +135,7 @@ class OAuthManager:
         client = self.get_client(provider)
         if client is None:
             raise HTTPException(404)
+            
         return await client.authorize_redirect(request, redirect_uri)
 
     async def handle_callback(self, provider, request, response):
@@ -139,8 +148,17 @@ class OAuthManager:
             log.warning(f"OAuth callback error: {e}")
             raise HTTPException(400, detail=ERROR_MESSAGES.INVALID_CRED)
         user_data: UserInfo = token["userinfo"]
+        
         if not user_data:
             user_data: UserInfo = await client.userinfo(token=token)
+
+        # Request userinfo via API if email not given
+        email = user_data.get(auth_manager_config.OAUTH_EMAIL_CLAIM, "").lower()
+        if not email or not user_data:
+            log.warning(f"OAuth user data is incomplete, request it again: {user_data}")
+            user_data: UserInfo = await client.userinfo(token=token)
+            log.warning(f"OAuth user data was incomplete, this is the new one: {user_data}")
+        
         if not user_data:
             log.warning(f"OAuth callback failed, user data is missing: {token}")
             raise HTTPException(400, detail=ERROR_MESSAGES.INVALID_CRED)
@@ -207,16 +225,34 @@ class OAuthManager:
                         picture_url = ""
                 if not picture_url:
                     picture_url = "/user.png"
+
                 username_claim = auth_manager_config.OAUTH_USERNAME_CLAIM
+                givenname_claim = auth_manager_config.OAUTH_GIVENNAME_CLAIM
+                familyname_claim = auth_manager_config.OAUTH_FAMILYNAME_CLAIM
 
                 role = self.get_user_role(None, user_data)
+
+                username = user_data.get(username_claim, "")
+                if not username:
+                    givenname = user_data.get(givenname_claim, "")
+                    if givenname:
+                       username = givenname
+
+                    familyname = user_data.get(familyname_claim, "")
+                    if not username and familyname:
+                        username = familyname
+                    if username and familyname:
+                        username += " " + familyname
+
+                if not username:
+                    username = "User"
 
                 user = Auths.insert_new_auth(
                     email=email,
                     password=get_password_hash(
                         str(uuid.uuid4())
                     ),  # Random password, not used
-                    name=user_data.get(username_claim, "User"),
+                    name=username,
                     profile_image_url=picture_url,
                     role=role,
                     oauth_sub=provider_sub,
@@ -238,6 +274,9 @@ class OAuthManager:
                 raise HTTPException(
                     status.HTTP_403_FORBIDDEN, detail=ERROR_MESSAGES.ACCESS_PROHIBITED
                 )
+
+        #if user:
+            #todo!
 
         jwt_token = create_token(
             data={"id": user.id},

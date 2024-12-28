@@ -2682,7 +2682,7 @@ async def get_app_changelog():
 
 @app.get("/api/version/updates")
 async def get_app_latest_release_version():
-    if OFFLINE_MODE:
+    if True or OFFLINE_MODE:
         log.debug(
             f"Offline mode is enabled, returning current version as latest version"
         )
@@ -2739,7 +2739,7 @@ async def get_manifest_json():
     return {
         "name": WEBUI_NAME,
         "short_name": WEBUI_NAME,
-        "description": "Open WebUI is an open, extensible, user-friendly interface for AI that adapts to your workflow.",
+        "description": WEBUI_NAME,
         "start_url": "/",
         "display": "standalone",
         "background_color": "#343541",

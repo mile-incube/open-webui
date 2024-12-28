@@ -390,6 +390,18 @@ OAUTH_USERNAME_CLAIM = PersistentConfig(
     os.environ.get("OAUTH_USERNAME_CLAIM", "name"),
 )
 
+OAUTH_GIVENNAME_CLAIM = PersistentConfig(
+    "OAUTH_GIVENNAME_CLAIM",
+    "oauth.oidc.givenname_claim",
+    os.environ.get("OAUTH_GIVENNAME_CLAIM", "given_name"),
+)
+
+OAUTH_FAMILYNAME_CLAIM = PersistentConfig(
+    "OAUTH_FAMILYNAME_CLAIM",
+    "oauth.oidc.familyname_claim",
+    os.environ.get("OAUTH_FAMILYNAME_CLAIM", "family_name"),
+)
+
 OAUTH_PICTURE_CLAIM = PersistentConfig(
     "OAUTH_PICTURE_CLAIM",
     "oauth.oidc.avatar_claim",
