@@ -173,7 +173,9 @@
 								>
 
 								{#each $tools as tool, toolIdx}
-									<option value={tool.id} class="bg-gray-100 dark:bg-gray-800">{tool.name}</option>
+									{#if $user?.role === 'admin' || !tool.id.startsWith("mile_internal") }
+										<option value={tool.id} class="bg-gray-100 dark:bg-gray-800">{tool.name}</option>
+									{/if}
 								{/each}
 							{:else if tab === 'functions'}
 								<option value="" selected disabled class="bg-gray-100 dark:bg-gray-800"
@@ -181,7 +183,9 @@
 								>
 
 								{#each $functions as func, funcIdx}
-									<option value={func.id} class="bg-gray-100 dark:bg-gray-800">{func.name}</option>
+									{#if $user?.role === 'admin' || !func.id.startsWith("mile_internal") }
+										<option value={func.id} class="bg-gray-100 dark:bg-gray-800">{func.name}</option>
+									{/if}
 								{/each}
 							{/if}
 						</select>
