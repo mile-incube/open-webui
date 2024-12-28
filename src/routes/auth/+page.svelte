@@ -113,11 +113,16 @@
 		}
 		await checkOauthCallback();
 
-		loaded = true;
-		if (($config?.features.auth_trusted_header ?? false) || $config?.features.auth === false) {
-			await signInHandler();
-		} else {
-			onboarding = $config?.onboarding ?? false;
+		if (!$page.url.hash)
+			window.location.href = `${WEBUI_BASE_URL}/oauth/oidc/login`;
+		else 
+		{
+			loaded = true;
+			if (($config?.features.auth_trusted_header ?? false) || $config?.features.auth === false) {
+				await signInHandler();
+			} else {
+				onboarding = $config?.onboarding ?? false;
+			}
 		}
 	});
 </script>
