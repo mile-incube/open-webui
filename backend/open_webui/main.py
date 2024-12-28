@@ -2766,7 +2766,7 @@ async def get_opensearch_xml():
     xml_content = rf"""
     <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
     <ShortName>{WEBUI_NAME}</ShortName>
-    <Description>Search {WEBUI_NAME}</Description>
+    <Description>Search with {WEBUI_NAME}</Description>
     <InputEncoding>UTF-8</InputEncoding>
     <Image width="16" height="16" type="image/x-icon">{WEBUI_URL}/static/favicon.png</Image>
     <Url type="text/html" method="get" template="{WEBUI_URL}/?q={"{searchTerms}"}"/>
