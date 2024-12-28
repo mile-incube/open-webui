@@ -1027,5 +1027,7 @@
     "The email format you entered is invalid. Please double-check and make sure you're using a valid email address (e.g., yourname@example.com).": "Das von Ihnen eingegebene E-Mail-Format ist ungültig. Bitte überprüfen Sie es noch einmal und stellen Sie sicher, dass Sie eine gültige E-Mail-Adresse verwenden (z. B. ihrname@beispiel.com).",
 	"The password provided is incorrect. Please check for typos and try again.": "Das angegebene Passwort ist falsch. Bitte versuchen Sie es erneut.",
 	"This chat won't appear in history and your messages will not be saved.": "Dieser Chat wird nicht im Verlauf angezeigt und die Nachrichten werden nicht gespeichert.",
-	"Merged Response": "Zusammengeführte Antwort"
+	"Merged Response": "Zusammengeführte Antwort",
+	"Account setup pending": "Kontoeinrichtung ausstehend",
+	"We are currently preparing your account, this may take a few seconds.": "Wir bereiten gerade Ihr Konto vor, dies kann wenige Sekunden dauern."
 }
