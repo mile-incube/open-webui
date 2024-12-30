@@ -69,7 +69,7 @@ from open_webui.config import (
     LDAP_CA_CERT_FILE,
     LDAP_CIPHERS,
     MILE_IDENTITY_URL,
-    MILE_PORTAL_URL
+    MILE_PORTAL_URL,
     AppConfig,
 )
 from open_webui.env import (

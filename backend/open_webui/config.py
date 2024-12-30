@@ -448,13 +448,13 @@ OAUTH_ADMIN_ROLES = PersistentConfig(
 MILE_IDENTITY_URL = PersistentConfig(
     "MILE_IDENTITY_URL",
     "mile.identity_url",
-    os.environ.get("MILE_IDENTITY_URL", "https://id.cloud.mile-ai.de/"),
+    os.environ.get("MILE_IDENTITY_URL", "https://id.cloud.mile-ai.de"),
 )
 
 MILE_PORTAL_URL = PersistentConfig(
     "MILE_PORTAL_URL",
     "mile.portal_url",
-    os.environ.get("MILE_PORTAL_URL", "https://portal.cloud.mile-ai.de/"),
+    os.environ.get("MILE_PORTAL_URL", "https://portal.cloud.mile-ai.de"),
 )
 
 

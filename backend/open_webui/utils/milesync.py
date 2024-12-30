@@ -186,7 +186,7 @@ class MileSync:
                             "description": f"Liefert schnell gute Ergebnisse bei alltäglichen Aufgaben.\nBereitgestellt in Europa, basiert auf dem Modell GPT-4o-mini von OpenAI.",
                             "capabilities": {
                                 "vision": True,
-                                "usage": False,
+                                "usage": True,
                                 "citations": True
                             },
                             "suggestion_prompts": None,
@@ -207,7 +207,7 @@ class MileSync:
                             "description": f"Versteht komplexe zusammenhänge und ist  für anspruchsvolle Aufgaben geeignet.\nBereitgestellt in Europa, basiert auf dem Modell GPT-4o von OpenAI.",
                             "capabilities": {
                                 "vision": True,
-                                "usage": False,
+                                "usage": True,
                                 "citations": True
                             },
                             "suggestion_prompts": None,
@@ -228,9 +228,10 @@ class MileSync:
         log.warning(f'Create assignments for {len(orgIds)} orgIds')
         await self.create_or_update_group_assignments(user.id, orgIds)
 
-        if len(orgIds) > 0:
-            Users.update_user_role_by_id(user.id, "user")
-        else:
-            Users.update_user_role_by_id(user.id, "pending")
+        if user.role != "admin":
+            if len(orgIds) > 0:
+                Users.update_user_role_by_id(user.id, "user")
+            else:
+                Users.update_user_role_by_id(user.id, "pending")
 
 mile_sync = MileSync()

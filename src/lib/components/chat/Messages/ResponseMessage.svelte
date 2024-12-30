@@ -932,7 +932,7 @@
 									</Tooltip>
 								{/if}
 
-								{#if message.info}
+								{#if message.info && $user.role === 'admin' }
 									<Tooltip
 										content={message.info.openai
 											? message.info.usage
