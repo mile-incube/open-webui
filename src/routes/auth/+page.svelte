@@ -113,7 +113,7 @@
 		}
 		await checkOauthCallback();
 
-		if (!$page.url.hash)
+		if (!$page.url.hash) //force login to 
 			window.location.href = `${WEBUI_BASE_URL}/oauth/oidc/login`;
 		else 
 		{

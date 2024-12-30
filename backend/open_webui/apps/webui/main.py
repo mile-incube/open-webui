@@ -23,6 +23,7 @@ from open_webui.apps.webui.routers import (
     tools,
     users,
     utils,
+    mileapi
 )
 from open_webui.apps.webui.utils import load_function_module_by_id
 from open_webui.config import (
@@ -189,6 +190,9 @@ app.include_router(evaluations.router, prefix="/evaluations", tags=["evaluations
 
 
 app.include_router(utils.router, prefix="/utils", tags=["utils"])
+
+app.include_router(mileapi.router, prefix="/mileapi", tags=["mileapi"])
+
 
 
 @app.get("/")

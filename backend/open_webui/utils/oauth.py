@@ -37,6 +37,10 @@ from open_webui.constants import ERROR_MESSAGES
 from open_webui.env import WEBUI_SESSION_COOKIE_SAME_SITE, WEBUI_SESSION_COOKIE_SECURE
 from open_webui.utils.misc import parse_duration
 from open_webui.utils.utils import get_password_hash, create_token
+from open_webui.utils.milesync import (
+    mile_sync,
+    OrgInfo
+)
 from open_webui.utils.webhook import post_webhook
 
 log = logging.getLogger(__name__)
@@ -155,9 +159,7 @@ class OAuthManager:
         # Request userinfo via API if email not given
         email = user_data.get(auth_manager_config.OAUTH_EMAIL_CLAIM, "").lower()
         if not email or not user_data:
-            log.warning(f"OAuth user data is incomplete, request it again: {user_data}")
             user_data: UserInfo = await client.userinfo(token=token)
-            log.warning(f"OAuth user data was incomplete, this is the new one: {user_data}")
         
         if not user_data:
             log.warning(f"OAuth callback failed, user data is missing: {token}")
@@ -275,8 +277,8 @@ class OAuthManager:
                     status.HTTP_403_FORBIDDEN, detail=ERROR_MESSAGES.ACCESS_PROHIBITED
                 )
 
-        #if user:
-            #todo!
+        if user:
+            await mile_sync.do_sync(user.email)
 
         jwt_token = create_token(
             data={"id": user.id},
