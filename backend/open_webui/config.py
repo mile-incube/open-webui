@@ -441,6 +441,22 @@ OAUTH_ADMIN_ROLES = PersistentConfig(
     [role.strip() for role in os.environ.get("OAUTH_ADMIN_ROLES", "admin").split(",")],
 )
 
+####################################
+# MILE config
+####################################
+
+MILE_IDENTITY_URL = PersistentConfig(
+    "MILE_IDENTITY_URL",
+    "mile.identity_url",
+    os.environ.get("MILE_IDENTITY_URL", "https://id.cloud.mile-ai.de/"),
+)
+
+MILE_PORTAL_URL = PersistentConfig(
+    "MILE_PORTAL_URL",
+    "mile.portal_url",
+    os.environ.get("MILE_PORTAL_URL", "https://portal.cloud.mile-ai.de/"),
+)
+
 
 def load_oauth_providers():
     OAUTH_PROVIDERS.clear()

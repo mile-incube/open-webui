@@ -68,6 +68,8 @@ from open_webui.config import (
     LDAP_USE_TLS,
     LDAP_CA_CERT_FILE,
     LDAP_CIPHERS,
+    MILE_IDENTITY_URL,
+    MILE_PORTAL_URL
     AppConfig,
 )
 from open_webui.env import (
@@ -155,6 +157,9 @@ app.state.config.LDAP_SEARCH_FILTERS = LDAP_SEARCH_FILTERS
 app.state.config.LDAP_USE_TLS = LDAP_USE_TLS
 app.state.config.LDAP_CA_CERT_FILE = LDAP_CA_CERT_FILE
 app.state.config.LDAP_CIPHERS = LDAP_CIPHERS
+
+app.state.config.MILE_IDENTITY_URL = MILE_IDENTITY_URL
+app.state.config.MILE_PORTAL_URL = MILE_PORTAL_URL
 
 app.state.TOOLS = {}
 app.state.FUNCTIONS = {}
