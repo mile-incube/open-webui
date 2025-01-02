@@ -34,7 +34,7 @@
 				</div>
 
 				<div class=" mt-4 text-center text-sm dark:text-gray-200 w-full">
-					{$i18n.t('We are currently preparing your account, this may take a few seconds.')}
+					{$i18n.t('We are currently preparing your account, this may take a few seconds. If the account setup takes an unusually long time, please contact your MILE AI customer service contact.')}
 				</div>
 
 				<div class=" mt-6 mx-auto relative group w-fit">
